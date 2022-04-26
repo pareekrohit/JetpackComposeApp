@@ -58,7 +58,7 @@ fun Greeting2(name: String) {
         Row(
             modifier = Modifier
                 .fillMaxWidth()
-                .height(50.dp)
+                .wrapContentHeight()
         ) {
             Column(
                 horizontalAlignment = Alignment.Start, modifier = Modifier.weight(0.7f)
