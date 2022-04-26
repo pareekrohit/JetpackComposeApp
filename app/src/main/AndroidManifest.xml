@@ -10,15 +10,29 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.MyComposeApp">
         <activity
-            android:name=".MainActivity"
+            android:name=".ActivityMusic"
             android:exported="true"
-            android:label="@string/app_name"
-            android:theme="@style/Theme.MyComposeApp">
+            android:label="@string/title_activity_music"
+            android:theme="@style/Theme.MyComposeApp" >
+
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
+
+        </activity>
+
+        <activity
+            android:name=".MainActivity"
+            android:exported="true"
+            android:label="@string/app_name"
+            android:theme="@style/Theme.MyComposeApp">
+           <!-- <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>-->
         </activity>
     </application>
 
