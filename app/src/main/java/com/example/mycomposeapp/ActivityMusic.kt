@@ -10,12 +10,13 @@ import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.lazy.*
 import androidx.compose.foundation.shape.RoundedCornerShape
-import androidx.compose.material.Card
-import androidx.compose.material.Surface
-import androidx.compose.material.Text
+import androidx.compose.material.*
+import androidx.compose.material.icons.Icons
+import androidx.compose.material.icons.filled.Menu
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.text.style.TextAlign
@@ -31,15 +32,34 @@ class ActivityMusic : ComponentActivity() {
         setContent {
             MyComposeAppTheme {
                 // A surface container using the 'background' color from the theme
-                Column(
-                    modifier = Modifier
-                        .fillMaxSize()
-                        .padding(10.dp),
 
-                    ) {
+
+                Column(modifier = Modifier.fillMaxSize()) {
+
+                    TopAppBar(
+                        title = {
+                            Text(
+                                text = "Course App", textAlign = TextAlign.Center
+                            )
+                        },
+                        navigationIcon = {
+                            IconButton(onClick = { }) {
+                                Icon(
+                                    imageVector = Icons.Filled.Menu,
+                                    contentDescription = "Menu Btn"
+                                )
+                            }
+                        },
+                        backgroundColor = lightBlue,
+                        contentColor = Color.White,
+                        elevation = 2.dp,
+                        modifier = Modifier.fillMaxWidth()
+                    )
                     Surface(
                         modifier = Modifier
-                            .fillMaxSize(),
+                            .fillMaxSize()
+                            .padding(15.dp)
+
                     ) {
                         Greeting2("Android")
                     }
@@ -75,7 +95,7 @@ fun Greeting2(name: String) {
                     .size(0.dp, 40.dp)
                     .align(alignment = Alignment.CenterVertically)
                     .weight(0.3f),
-                )
+            )
         }
 
         Spacer(modifier = Modifier.height(30.dp))
@@ -141,18 +161,23 @@ fun DailyCodeCard() {
             .fillMaxWidth()
             .padding(10.dp),
         shape = RoundedCornerShape(10.dp),
-        elevation = 10.dp
+        elevation = 10.dp,
     ) {
 
         Column(
             Modifier
+                .fillMaxWidth()
                 .wrapContentHeight()
                 .background(lightGreen)
-                .padding(10.dp),
-            horizontalAlignment = Alignment.CenterHorizontally
+                .padding(10.dp)
+                .background(red),
+            horizontalAlignment = Alignment.CenterHorizontally,
+
         ) {
 
-            Row(Modifier.fillMaxWidth()) {
+            Row(Modifier.fillMaxWidth(),
+
+            ) {
 
                 Column(
                     Modifier.weight(0.8f),
@@ -199,7 +224,7 @@ fun SetCourses() {
         fontSize = 20.sp
     )
 
-    Spacer(modifier = Modifier.height(10.dp))
+    /*Spacer(modifier = Modifier.height(10.dp))*/
 
     val courseList = ArrayList<String>()
     courseList.add("Advance Python Course")
@@ -212,7 +237,7 @@ fun SetCourses() {
             Row(Modifier.padding(10.dp)) {
                 Card(
                     modifier = Modifier
-                        .padding(10.dp)
+                        .padding(0.dp, 10.dp)
                         .height(80.dp)
                         .weight(1f),
                     backgroundColor = lightBlue,

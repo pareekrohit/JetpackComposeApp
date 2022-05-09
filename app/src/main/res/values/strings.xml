@@ -1,4 +1,5 @@
 <resources>
     <string name="app_name">MyComposeApp</string>
     <string name="title_activity_music">ActivityMusic</string>
+    <string name="title_activity_udemy_practise">UdemyPractiseActivity</string>
 </resources>
