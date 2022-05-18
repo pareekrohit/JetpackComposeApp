@@ -18,12 +18,14 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.layout.ContentScale
+import androidx.compose.ui.layout.ModifierInfo
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import com.example.mycomposeapp.ui.theme.*
+import kotlinx.coroutines.MainScope
 import kotlin.collections.ArrayList
 
 class ActivityMusic : ComponentActivity() {
@@ -32,49 +34,59 @@ class ActivityMusic : ComponentActivity() {
         setContent {
             MyComposeAppTheme {
                 // A surface container using the 'background' color from the theme
-
-
-                Column(modifier = Modifier.fillMaxSize()) {
-
-                    TopAppBar(
-                        title = {
-                            Text(
-                                text = "Course App", textAlign = TextAlign.Center
-                            )
-                        },
-                        navigationIcon = {
-                            IconButton(onClick = { }) {
-                                Icon(
-                                    imageVector = Icons.Filled.Menu,
-                                    contentDescription = "Menu Btn"
-                                )
-                            }
-                        },
-                        backgroundColor = lightBlue,
-                        contentColor = Color.White,
-                        elevation = 2.dp,
-                        modifier = Modifier.fillMaxWidth()
-                    )
-                    Surface(
-                        modifier = Modifier
-                            .fillMaxSize()
-                            .padding(15.dp)
-
-                    ) {
-                        Greeting2("Android")
-                    }
-                }
+                MainScreen()
 
             }
         }
+
+
     }
 }
 
+
 @Composable
-fun Greeting2(name: String) {
-    /*.background(color = red)*/
-    Column() {
-        /*    .wrapContentSize(align = Alignment.TopCenter)*/
+fun MainScreen() {
+    Surface(
+        modifier = Modifier.fillMaxSize()
+    ) {
+        Scaffold(
+            topBar = { AppBar() },
+        ) {
+
+            Column(
+                modifier = Modifier.fillMaxSize()
+            ) {
+                CourseMainPage()
+            }
+
+
+        }
+    }
+
+}
+
+@Composable
+fun AppBar() {
+    TopAppBar(
+        title = { Text(text = "Course App", textAlign = TextAlign.Center) },
+        navigationIcon = {
+            IconButton(onClick = { }) {
+                Icon(
+                    imageVector = Icons.Filled.Menu,
+                    contentDescription = "Menu Btn"
+                )
+            }
+        },
+        backgroundColor = lightBlue,
+        contentColor = Color.White,
+        elevation = 2.dp,
+    )
+}
+
+
+@Composable
+fun CourseMainPage() {
+    Column(modifier = Modifier.padding(15.dp)) {
         Row(
             modifier = Modifier
                 .fillMaxWidth()
@@ -169,15 +181,15 @@ fun DailyCodeCard() {
                 .fillMaxWidth()
                 .wrapContentHeight()
                 .background(lightGreen)
-                .padding(10.dp)
-                .background(red),
+                .padding(10.dp),
             horizontalAlignment = Alignment.CenterHorizontally,
 
-        ) {
-
-            Row(Modifier.fillMaxWidth(),
-
             ) {
+
+            Row(
+                Modifier.fillMaxWidth(),
+
+                ) {
 
                 Column(
                     Modifier.weight(0.8f),
@@ -281,8 +293,9 @@ fun SetCourses() {
 
 @Preview(showBackground = true)
 @Composable
-fun DefaultPreview2() {
-    MyComposeAppTheme {
-        Greeting2("Android")
+fun Preview() {
+    MyComposeAppTheme() {
+        MainScreen()
     }
 }
+
