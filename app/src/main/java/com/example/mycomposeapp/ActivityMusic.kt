@@ -5,6 +5,7 @@ import android.os.Bundle
 import android.util.Log
 import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
+import androidx.activity.viewModels
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.*
@@ -24,28 +25,30 @@ import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
+import androidx.lifecycle.viewmodel.compose.viewModel
+import com.example.mycomposeapp.meal.MealViewModel
 import com.example.mycomposeapp.ui.theme.*
 import kotlinx.coroutines.MainScope
 import kotlin.collections.ArrayList
 
+
 class ActivityMusic : ComponentActivity() {
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContent {
             MyComposeAppTheme {
-                // A surface container using the 'background' color from the theme
                 MainScreen()
-
             }
         }
-
-
     }
 }
 
 
 @Composable
 fun MainScreen() {
+    val viewModel: MealViewModel = viewModel()
+
     Surface(
         modifier = Modifier.fillMaxSize()
     ) {
@@ -58,8 +61,6 @@ fun MainScreen() {
             ) {
                 CourseMainPage()
             }
-
-
         }
     }
 
@@ -86,6 +87,7 @@ fun AppBar() {
 
 @Composable
 fun CourseMainPage() {
+
     Column(modifier = Modifier.padding(15.dp)) {
         Row(
             modifier = Modifier
@@ -125,6 +127,8 @@ fun LazyList() {
     listItem.add("Python")
     listItem.add("Ruby")
     listItem.add("DotNet")
+
+
 
     LazyRow() {
         items(listItem) { model ->
@@ -187,9 +191,8 @@ fun DailyCodeCard() {
             ) {
 
             Row(
-                Modifier.fillMaxWidth(),
-
-                ) {
+                Modifier.fillMaxWidth()
+            ) {
 
                 Column(
                     Modifier.weight(0.8f),
@@ -211,11 +214,10 @@ fun DailyCodeCard() {
                     contentDescription = "",
                     modifier = Modifier
                         .size(60.dp, 100.dp)
-                        .padding(20.dp)
-                        .align(alignment = Alignment.CenterVertically)
+                        .padding(10.dp)
                         .weight(0.5f),
                     contentScale = ContentScale.Fit,
-                    alignment = Alignment.Center
+                    alignment = Alignment.CenterEnd
                 )
             }
 
