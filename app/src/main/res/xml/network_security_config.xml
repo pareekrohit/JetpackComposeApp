@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="utf-8"?><!--
+<network-security-config xmlns:tools="http://schemas.android.com/tools"
+    xmlns:android="http://schemas.android.com/apk/res/android">
+    <domain-config>
+        <domain includeSubdomains="true">themealdb.com</domain>
+        <trust-anchors>
+            <certificates src="system" />
+            <certificates src="user" />
+        </trust-anchors>
+    </domain-config>
+</network-security-config>-->
+
+<network-security-config>
+    <domain-config cleartextTrafficPermitted="true">
+        <domain includeSubdomains="true">139.59.24.38</domain>
+        <domain includeSubdomains="true">themealdb.com</domain>
+    </domain-config>
+</network-security-config>

@@ -2,11 +2,11 @@ package com.example.mycomposeapp.model
 
 
 data class Category(
-    private val idCategory: String,
+     val idCategory: String,
 
-    private val strCategory: String,
+     val strCategory: String,
 
-    private val strCategoryDescription: String,
+     val strCategoryDescription: String,
 
-    private val strCategoryThumb: String
+     val strCategoryThumb: String
 )

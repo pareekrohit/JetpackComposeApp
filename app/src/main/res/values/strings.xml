@@ -3,4 +3,6 @@
     <string name="title_activity_music">ActivityMusic</string>
     <string name="title_activity_udemy_practise">UdemyPractiseActivity</string>
     <string name="title_activity_meal">MealActivity</string>
+    <string name="title_activity_chat">chatActivity</string>
+    <string name="title_activity_add_list">AddListActivity</string>
 </resources>

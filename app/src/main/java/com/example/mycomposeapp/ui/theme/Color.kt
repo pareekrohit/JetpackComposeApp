@@ -15,3 +15,5 @@ val lightBlue = Color(0xFF5069F3)
 val lightOrange = Color(0xFFF7815C)
 val lightYellow = Color(0xFFF0D805)
 val lightGreenish = Color(0xFF66F3E6)
+
+val chatGreen = Color(0xFF13998D)

@@ -1,15 +1,12 @@
-package com.example.mycomposeapp
+package com.example.mycomposeapp.meal.screen
 
-
-import android.os.Bundle
-import android.util.Log
-import androidx.activity.ComponentActivity
-import androidx.activity.compose.setContent
-import androidx.activity.viewModels
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.background
+import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.*
-import androidx.compose.foundation.lazy.*
+import androidx.compose.foundation.lazy.LazyColumn
+import androidx.compose.foundation.lazy.LazyRow
+import androidx.compose.foundation.lazy.items
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material.*
 import androidx.compose.material.icons.Icons
@@ -19,36 +16,26 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.layout.ContentScale
-import androidx.compose.ui.layout.ModifierInfo
+import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import androidx.lifecycle.viewmodel.compose.viewModel
-import com.example.mycomposeapp.meal.MealViewModel
-import com.example.mycomposeapp.ui.theme.*
-import kotlinx.coroutines.MainScope
-import kotlin.collections.ArrayList
-
-
-class ActivityMusic : ComponentActivity() {
-
-    override fun onCreate(savedInstanceState: Bundle?) {
-        super.onCreate(savedInstanceState)
-        setContent {
-            MyComposeAppTheme {
-                MainScreen()
-            }
-        }
-    }
-}
-
+import androidx.navigation.NavHostController
+import coil.compose.rememberAsyncImagePainter
+import coil.request.ImageRequest
+import com.example.mycomposeapp.R
+import com.example.mycomposeapp.meal.viewModel.MealViewModel
+import com.example.mycomposeapp.model.Category
+import com.example.mycomposeapp.ui.theme.MyComposeAppTheme
+import com.example.mycomposeapp.ui.theme.lightBlue
+import com.example.mycomposeapp.ui.theme.lightGreen
 
 @Composable
-fun MainScreen() {
-    val viewModel: MealViewModel = viewModel()
-
+fun MealScreen(navController: NavHostController?) {
+    /**navController is passed so that u can navigate from Meal screen to any other screen*/
     Surface(
         modifier = Modifier.fillMaxSize()
     ) {
@@ -59,7 +46,7 @@ fun MainScreen() {
             Column(
                 modifier = Modifier.fillMaxSize()
             ) {
-                CourseMainPage()
+                CourseMainPage(navController)
             }
         }
     }
@@ -86,9 +73,13 @@ fun AppBar() {
 
 
 @Composable
-fun CourseMainPage() {
-
+fun CourseMainPage(navController: NavHostController?) {
     Column(modifier = Modifier.padding(15.dp)) {
+
+        Button(onClick = { navController?.navigate("chatScreen") }) {
+            Text(text = "Go to Chat Screen")
+        }
+
         Row(
             modifier = Modifier
                 .fillMaxWidth()
@@ -102,7 +93,6 @@ fun CourseMainPage() {
             }
 
             Image(
-
                 painter = painterResource(id = R.drawable.ic_search),
                 contentDescription = "",
                 modifier = Modifier
@@ -121,50 +111,58 @@ fun CourseMainPage() {
 
 @Composable
 fun LazyList() {
-    val listItem = ArrayList<String>()
-    listItem.add("Java")
-    listItem.add("Kotlin")
-    listItem.add("Python")
-    listItem.add("Ruby")
-    listItem.add("DotNet")
-
-
+    val viewModel: MealViewModel = viewModel()
+    /*val rememberMeals: MutableState<List<Category>> = remember{ mutableStateOf(emptyList<Category>()) }*/
 
     LazyRow() {
-        items(listItem) { model ->
-            MySubjectList(item = model)
+        items(viewModel.mealState.value) { model ->
+            MySubjectList(item = model) {}
         }
     }
-
     DailyCodeCard()
-
 }
 
 @Composable
-fun MySubjectList(item: String) {
-    Log.d("ActivityMusic : ", item)
-
+fun MySubjectList(item: Category, onCardClick: () -> Unit) {
     Card(
         modifier = Modifier
-            .height(70.dp)
+            .wrapContentHeight()
             .wrapContentWidth()
             .padding(10.dp),
         shape = RoundedCornerShape(10.dp),
-        elevation = 10.dp
+        elevation = 10.dp,
     ) {
 
         Column(
-            Modifier.background(lightGreen)
+            modifier = Modifier
+                .background(lightGreen)
+                .wrapContentHeight()
+                .wrapContentWidth()
+                .clickable { onCardClick }
         ) {
+            val painter = rememberAsyncImagePainter(
+                model = ImageRequest.Builder(LocalContext.current)
+                    .data(item.strCategoryThumb)
+                    .build()
+            )
+
+            Image(
+                painter = painter,
+                contentDescription = "",
+                modifier = Modifier
+                    .size(60.dp)
+                    .align(Alignment.CenterHorizontally),
+            )
 
             Text(
-                text = item,
+                text = item.strCategory,
                 modifier = Modifier
-                    .fillMaxSize()
-                    .padding(20.dp, 0.dp, 20.dp, 0.dp)
-                    .wrapContentHeight(), // make text center vertical
+                    .padding(20.dp, 0.dp, 20.dp, 7.dp)
+                    .wrapContentHeight()
+                    .wrapContentWidth(), // make text center vertical
                 textAlign = TextAlign.Center // make text center horizontal , fontSize = 20.sp
             )
+
         }
     }
 }
@@ -175,7 +173,7 @@ fun DailyCodeCard() {
         modifier = Modifier
             .wrapContentHeight()
             .fillMaxWidth()
-            .padding(10.dp),
+            .padding(10.dp, 25.dp, 10.dp, 10.dp),
         shape = RoundedCornerShape(10.dp),
         elevation = 10.dp,
     ) {
@@ -281,23 +279,16 @@ fun SetCourses() {
                             text = model, fontSize = 16.sp
                         )
                     }
-
                 }
-
             }
-
-
         }
     }
-
 }
-
 
 @Preview(showBackground = true)
 @Composable
-fun Preview() {
+fun Preview1() {
     MyComposeAppTheme() {
-        MainScreen()
+        MealScreen(null)
     }
 }
-
