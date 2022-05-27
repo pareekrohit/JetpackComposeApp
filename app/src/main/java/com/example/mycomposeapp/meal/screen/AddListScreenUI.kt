@@ -56,7 +56,6 @@ fun Greeting(name: String) {
 @Composable
 fun Preview2() {
     MyComposeAppTheme {
-
         Surface(
             modifier = Modifier.fillMaxSize(),
             color = MaterialTheme.colors.background
