@@ -1,5 +1,6 @@
 package com.example.mycomposeapp.meal.screen
 
+import android.util.Log
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.background
 import androidx.compose.foundation.clickable
@@ -103,20 +104,23 @@ fun CourseMainPage(navController: NavHostController?) {
         }
 
         Spacer(modifier = Modifier.height(30.dp))
-        LazyList()
+        LazyList(navController)
     }
 
 }
 
 
 @Composable
-fun LazyList() {
+fun LazyList(navController: NavHostController?) {
     val viewModel: MealViewModel = viewModel()
     /*val rememberMeals: MutableState<List<Category>> = remember{ mutableStateOf(emptyList<Category>()) }*/
 
     LazyRow() {
         items(viewModel.mealState.value) { model ->
-            MySubjectList(item = model) {}
+            MySubjectList(item = model) {
+                Log.d("MealScreenUI","OnClick")
+                navController?.navigate("AddListActivity")
+            }
         }
     }
     DailyCodeCard()
@@ -138,7 +142,7 @@ fun MySubjectList(item: Category, onCardClick: () -> Unit) {
                 .background(lightGreen)
                 .wrapContentHeight()
                 .wrapContentWidth()
-                .clickable { onCardClick }
+                .clickable { onCardClick.invoke() }
         ) {
             val painter = rememberAsyncImagePainter(
                 model = ImageRequest.Builder(LocalContext.current)

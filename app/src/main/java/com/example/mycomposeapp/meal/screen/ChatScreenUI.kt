@@ -34,12 +34,12 @@ fun ChatScreen(navController: NavHostController?) {
         }
 
 
-        Row(
+        /*Row(
             verticalAlignment = Alignment.Bottom,
             modifier = Modifier.height(50.dp)
         ) {
             Text(text = "Hi hello")
-        }
+        }*/
 
     }
 }

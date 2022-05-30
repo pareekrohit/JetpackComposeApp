@@ -46,6 +46,11 @@ fun AddList() {
 
 }
 
+@Preview(showBackground = true)
+@Composable
+fun Preview(){
+    AddList()
+}
 
 @Composable
 fun Greeting(name: String) {

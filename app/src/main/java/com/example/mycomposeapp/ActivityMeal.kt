@@ -4,8 +4,18 @@ package com.example.mycomposeapp
 import android.os.Bundle
 import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
+import androidx.compose.foundation.background
+import androidx.compose.foundation.layout.*
+import androidx.compose.foundation.lazy.LazyColumn
+import androidx.compose.foundation.lazy.LazyRow
+import androidx.compose.foundation.lazy.items
+import androidx.compose.material.Surface
+import androidx.compose.material.Text
 import androidx.compose.runtime.Composable
+import androidx.compose.ui.Alignment
+import androidx.compose.ui.Modifier
 import androidx.compose.ui.tooling.preview.Preview
+import androidx.compose.ui.unit.dp
 import androidx.navigation.NavHostController
 import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
@@ -25,9 +35,34 @@ class ActivityMeal : ComponentActivity() {
 
             MyComposeAppTheme {
                 NavigationScreen(navController)
+//                HelloWorld()
             }
         }
     }
+}
+
+@Composable
+fun HelloWorld() {
+   /* Column(
+        modifier = Modifier
+            .padding(10.dp)
+            .fillMaxSize()
+            .background(green1)
+
+    ) {
+        Text(text = "Hello Text on Screen")
+        Text(text = "Hello Text on Screen")
+        Text(text = "Hello Text on Screen")
+        Text(text = "Hello Text on Screen")
+    }
+*/
+
+    /*LazyRow(contentPadding = PaddingValues(10.dp)){
+        items(5) {
+                Text(text = "Hello World")
+        }
+    }*/
+
 }
 
 @Composable
@@ -42,7 +77,7 @@ fun NavigationScreen(navController: NavHostController) {
         composable("chatScreen") {
             ChatScreen(navController)
         }
-        composable("AddListActivity"){
+        composable("AddListActivity") {
             AddListScreen()
         }
     }
@@ -71,15 +106,14 @@ fun HelloText(text: String) {
 fun Preview() {
     MyComposeAppTheme() {
         MealScreen(null)
-        /*Surface(modifier = Modifier.fillMaxSize().padding(20.dp)) {
-            HelloText(text = "Android")
+        /*Surface(
+            modifier = Modifier
+                .fillMaxSize()
+        ) {
+            HelloWorld()
         }*/
-
     }
 }
 
 
-/*Surface(modifier = Modifier.fillMaxSize().padding(20.dp)) {
-            HelloText(text = "Android")
-        }*/
 
